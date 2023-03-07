@@ -6,7 +6,7 @@ TESTING :: true;
 
 #load "src/decoder.jai";
 
-main :: () {
+tests :: () {
 	print("running tests...");
 	test_decode_register_to_register_move_single();
 	print("passed!");
@@ -51,4 +51,4 @@ sanitize_asm_string :: (asm: string) -> string{
 	return str;
 }
 
-#run main();
+#run tests();

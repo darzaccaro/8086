@@ -1,8 +1,6 @@
 #import "Basic";
 #import "File";
 #import "Hash_Table";
-// data.data[0], b;0b10001001;unsigned char;
-// data.data[1], b;0b11011001;unsigned char;
 
 // byte 1 bitmasks
 OPCODE_MASK :: 0b11111100;
@@ -12,15 +10,6 @@ W_MASK      :: 0b00000001;
 MOD_MASK    :: 0b11000000;
 REG_MASK    :: 0b00111000;
 RM_MASK     :: 0b00000111;
-
-is_2_byte_op :: (op: string) -> bool {
-	if op == "mov" {
-		return true;
-	}
-	// assert(false);
-	print("unsupported opcode");
-	return false;
-}
 
 decode_file_to_string :: (path: string) -> string {
 	data, success := read_entire_file(path);
@@ -52,7 +41,7 @@ decode_file_to_string :: (path: string) -> string {
     return builder_to_string(*builder);
 }
 
-#if !TESTING {
+#if !TESTING
 main :: () {
 	args := get_command_line_arguments();
 	if args.count < 2 {
@@ -63,7 +52,6 @@ main :: () {
 	output := decode_file_to_string(args[1]);
 	
     write_entire_file("out/decoded.asm", output);
-}
 }
 
 get_opcode :: (byte1: u8) -> u8, string {
@@ -116,4 +104,12 @@ get_register :: (byte1: u8, byte2: u8, is_source: bool) -> u8, string {
 			case 0b00000111; return register, "bh";
 		}
 	}
+}
+
+is_2_byte_op :: (op: string) -> bool {
+	if op == "mov" {
+		return true;
+	}
+	print("unsupported opcode");
+	return false;
 }
