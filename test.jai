@@ -9,6 +9,7 @@ TESTING :: true;
 tests :: () {
 	print("running tests...");
 	test_decode_register_to_register_move_single();
+	test_decode_register_to_register_move_many();
 	print("passed!");
 }
 
